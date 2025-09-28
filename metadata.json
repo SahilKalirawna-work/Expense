@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Daily Spending Tracker",
+  "description": "An application to track daily expenses based on a curated list of items. Users can add expenses, manage the item list, and export their spending data to Excel. All data is saved locally in the browser.",
+  "requestFramePermissions": []
+}
