@@ -8,11 +8,7 @@ import { AddExpenseModal } from './components/AddExpenseModal';
 import { ManageItemsModal } from './components/ManageItemsModal';
 import { exportToExcel } from './utils/exportUtils';
 
-const DEFAULT_ITEMS: CuratedItem[] = [
-  { id: '1', name: 'Coffee', price: 3.50 },
-  { id: '2', name: 'Lunch Sandwich', price: 8.75 },
-  { id: '3', name: 'Bus Fare', price: 2.25 },
-];
+const DEFAULT_ITEMS: CuratedItem[] = [];
 
 function App() {
   const [expenses, setExpenses] = useLocalStorage<Expense[]>('expenses', []);
