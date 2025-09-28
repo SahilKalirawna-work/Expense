@@ -1,16 +1,17 @@
-
 import React from 'react';
 import { PlusIcon } from './icons/PlusIcon';
 import { SettingsIcon } from './icons/SettingsIcon';
 import { ExportIcon } from './icons/ExportIcon';
+import { ClearIcon } from './icons/ClearIcon';
 
 interface HeaderProps {
   onAddExpense: () => void;
   onManageItems: () => void;
   onExport: () => void;
+  onClearData: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onAddExpense, onManageItems, onExport }) => {
+export const Header: React.FC<HeaderProps> = ({ onAddExpense, onManageItems, onExport, onClearData }) => {
   return (
     <header className="flex justify-between items-center pb-4 border-b border-gray-200 dark:border-gray-700">
       <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
@@ -37,6 +38,13 @@ export const Header: React.FC<HeaderProps> = ({ onAddExpense, onManageItems, onE
           aria-label="Export Data"
         >
           <ExportIcon />
+        </button>
+        <button
+          onClick={onClearData}
+          className="p-2 rounded-full bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-gray-900 transition-all duration-200"
+          aria-label="Clear All Data"
+        >
+          <ClearIcon />
         </button>
       </div>
     </header>

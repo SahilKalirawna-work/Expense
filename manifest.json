@@ -1,0 +1,15 @@
+{
+  "short_name": "Spending",
+  "name": "Daily Spending Tracker",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4299e1",
+  "background_color": "#f7fafc"
+}

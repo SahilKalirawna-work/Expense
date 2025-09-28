@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import type { CuratedItem, Expense } from './types';
@@ -6,9 +5,14 @@ import { Header } from './components/Header';
 import { ExpenseTable } from './components/ExpenseTable';
 import { AddExpenseModal } from './components/AddExpenseModal';
 import { ManageItemsModal } from './components/ManageItemsModal';
+import { ClearDataModal } from './components/ClearDataModal';
 import { exportToExcel } from './utils/exportUtils';
 
-const DEFAULT_ITEMS: CuratedItem[] = [];
+const DEFAULT_ITEMS: CuratedItem[] = [
+  { id: '1', name: 'Coffee', price: 3.50 },
+  { id: '2', name: 'Lunch Sandwich', price: 8.75 },
+  { id: '3', name: 'Bus Fare', price: 2.25 },
+];
 
 function App() {
   const [expenses, setExpenses] = useLocalStorage<Expense[]>('expenses', []);
@@ -16,6 +20,7 @@ function App() {
 
   const [isAddExpenseModalOpen, setAddExpenseModalOpen] = useState(false);
   const [isManageItemsModalOpen, setManageItemsModalOpen] = useState(false);
+  const [isClearDataModalOpen, setClearDataModalOpen] = useState(false);
 
   const addExpense = useCallback((itemId: string, quantity: number) => {
     const item = curatedItems.find(i => i.id === itemId);
@@ -55,6 +60,13 @@ function App() {
     exportToExcel(expenses, curatedItems);
   }, [expenses, curatedItems]);
 
+  const handleConfirmClearData = useCallback(() => {
+    setExpenses([]);
+    setCuratedItems(DEFAULT_ITEMS);
+    // The useLocalStorage hook will sync this with localStorage
+    setClearDataModalOpen(false);
+  }, [setExpenses, setCuratedItems]);
+
   return (
     <div className="min-h-screen text-gray-800 dark:text-gray-200 transition-colors duration-300">
       <div className="container mx-auto p-4 md:p-8">
@@ -62,6 +74,7 @@ function App() {
           onAddExpense={() => setAddExpenseModalOpen(true)}
           onManageItems={() => setManageItemsModalOpen(true)}
           onExport={handleExport}
+          onClearData={() => setClearDataModalOpen(true)}
         />
         <main className="mt-8">
           <ExpenseTable expenses={expenses} />
@@ -83,6 +96,13 @@ function App() {
           onAddItem={addCuratedItem}
           onDeleteItem={deleteCuratedItem}
           onUpdateItem={updateCuratedItem}
+        />
+      )}
+
+      {isClearDataModalOpen && (
+        <ClearDataModal
+          onClose={() => setClearDataModalOpen(false)}
+          onConfirm={handleConfirmClearData}
         />
       )}
     </div>
