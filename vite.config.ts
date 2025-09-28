@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
         port: 4000,
         host: '0.0.0.0',
       },
+      base: '/Expense',
       plugins: [react()],
       resolve: {
         alias: {

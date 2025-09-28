@@ -1,14 +1,17 @@
 {
-  "name": "copy-of-daily-spending-tracker",
-  "private": true,
-  "version": "0.0.0",
+  "name": "daily-spending-tracker",
+  "homepage": "https://sahilkalirawna-work.github.io/Expense",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -b main"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
