@@ -49,6 +49,12 @@ function App() {
     setCuratedItems(prev => prev.filter(item => item.id !== id));
   }, [setCuratedItems]);
   
+  const updateCuratedItem = useCallback((id: string, newName: string, newPrice: number) => {
+    setCuratedItems(prev => prev.map(item => 
+      item.id === id ? { ...item, name: newName, price: newPrice } : item
+    ));
+  }, [setCuratedItems]);
+
   const handleExport = useCallback(() => {
     exportToExcel(expenses, curatedItems);
   }, [expenses, curatedItems]);
@@ -80,6 +86,7 @@ function App() {
           onClose={() => setManageItemsModalOpen(false)}
           onAddItem={addCuratedItem}
           onDeleteItem={deleteCuratedItem}
+          onUpdateItem={updateCuratedItem}
         />
       )}
     </div>
